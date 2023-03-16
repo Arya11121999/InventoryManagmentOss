@@ -1,28 +1,25 @@
 <div>
   <nav class="navbar navbar-light bg-primary">
     <div class="container-fluid">
-      <h1 style="color: aliceblue">
-        <div *ngFor="let factory; factory">
-          {{ factory.factoryName }}
-        </div>
-
-        <p>Factory Name: {{ factoryName }}</p>
-      </h1>
-    </div>
-    <div class="d-flex">
-      <button
-        (click)="clickAddProduct()"
-        type="button"
-        data-bs-toggle="modal"
-        data-bs-target="#exampleModal"
-        class="btn btn-success"
-      >
-        Add Product
-      </button>
+      <h3 class="ml-2 heading" style="color: aliceblue">
+        Factory Name : {{ factory.factoryName }}
+      </h3>
+      <h3 class="ml-2 heading" style="color: aliceblue">
+        Factory Location : {{ factory.factoryLocation }}
+      </h3>
     </div>
   </nav>
 
-  <!-- <div class="container d-flex p-2 bd-highlight justify-content-between">
+  <h3 class="text-center mt-2">Products</h3>
+
+  <div class="container d-flex p-2 bd-highlight justify-content-between">
+    <button
+      class="btn btn-primary"
+      style="margin-right: 100px"
+      (click)="navigateFactory()"
+    >
+      Go to Factory Page
+    </button>
     <button
       class="btn btn-primary"
       style="margin-right: 100px"
@@ -46,137 +43,138 @@
         />
       </svg>
       Add
-    </button> -->
-</div>
-<!-- Modal -->
-<div
-  class="modal fade"
-  id="exampleModal"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add new Product</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">
-        <form [formGroup]="formValue">
-          <div class="form-group">
-            <label for="exampleInputEmail1">Product Name</label>
-            <input
-              type="text"
-              formControlName="productName"
-              class="form-control"
-            />
-          </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1"> Description</label>
-            <input
-              type="text"
-              formControlName="productDescription"
-              class="form-control"
-            />
-          </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1"> Quantity</label>
-            <input
-              type="text"
-              formControlName="productQuantity"
-              class="form-control"
-            />
-          </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1"> Upload Image</label>
-            <input
-              type="file"
-              formControlName="productImage"
-              class="form-control"
-              (change)="onFileSelected($event)"
-            />
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button
-          type="button"
-          id="cancel"
-          class="btn btn-secondary"
-          data-bs-dismiss="modal"
-        >
-          Close
-        </button>
-        <button
-          type="button"
-          (click)="addProduct()"
-          *ngIf="!isUpdatingProduct"
-          class="btn btn-primary"
-        >
-          Add
-        </button>
-        <button
-          type="button"
-          (click)="updateProduct()"
-          *ngIf="isUpdatingProduct"
-          class="btn btn-primary"
-        >
-          Update
-        </button>
+    </button>
+  </div>
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add new Product</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="formValue">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Product Name</label>
+              <input
+                type="text"
+                formControlName="productName"
+                class="form-control"
+              />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1"> Description</label>
+              <input
+                type="text"
+                formControlName="productDescription"
+                class="form-control"
+              />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1"> Quantity</label>
+              <input
+                type="text"
+                formControlName="productQuantity"
+                class="form-control"
+              />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1"> Upload Image</label>
+              <input
+                type="file"
+                formControlName="productImage"
+                class="form-control"
+                (change)="onFileSelected($event)"
+              />
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            id="cancel"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button
+            type="button"
+            (click)="addProduct()"
+            *ngIf="!isUpdatingProduct"
+            class="btn btn-primary"
+          >
+            Add
+          </button>
+          <button
+            type="button"
+            (click)="updateProduct()"
+            *ngIf="isUpdatingProduct"
+            class="btn btn-primary"
+          >
+            Update
+          </button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="mt-4">
-  <table class="table table-hover mt-3">
-    <thead>
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Name</th>
-        <th scope="col"></th>
-        <th scope="col">Description</th>
-        <th scope="col">Quantity</th>
-        <th scope="col"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let product of products">
-        <td>{{ product.productId }}</td>
-        <td>{{ product.productName }}</td>
-        <td>
-          <img
-            src="{{ product.imageUrl }}"
-            alt="No Image Available"
-            height="100px"
-            width="200px"
-          />
-        </td>
-        <td>{{ product.description }}</td>
-        <td>{{ product.quantity }}</td>
-        <td>
-          <button
-            (click)="onEdit(product)"
-            class="btn btn-secondary"
-            data-bs-toggle="modal"
-            data-bs-target="#exampleModal"
-          >
-            Edit
-          </button>
-          <button
-            (click)="deleteProduct(product.productId)"
-            class="btn btn-danger mx-3"
-          >
-            Delete
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="mt-4">
+    <table class="table container">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Name</th>
+          <th scope="col"></th>
+          <th scope="col">Description</th>
+          <th scope="col">Quantity</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td>{{ product.productId }}</td>
+          <td>{{ product.productName }}</td>
+          <td>
+            <img
+              src="{{ product.imageUrl }}"
+              alt="No Image Available"
+              height="100px"
+              width="200px"
+            />
+          </td>
+          <td>{{ product.description }}</td>
+          <td>{{ product.quantity }}</td>
+          <td>
+            <button
+              (click)="onEdit(product)"
+              class="btn btn-secondary"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              Edit
+            </button>
+            <button
+              (click)="deleteProduct(product.productId)"
+              class="btn btn-danger mx-3"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

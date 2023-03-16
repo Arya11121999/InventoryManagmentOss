@@ -21,7 +21,6 @@ export class ProductComponent implements OnInit {
   factory: FactoryModel;
   productImage: File;
   productId: number;
-  factoryName: any;
   constructor(
     private productService: ProductService,
     private formBuilder: FormBuilder,
@@ -30,7 +29,6 @@ export class ProductComponent implements OnInit {
     private factoryService: FactoryService
   ) {
     this.factoryId = this.route.snapshot.params['id'];
-
     this.factory = new FactoryModel();
     this.getFactory();
     console.log(this.factoryId);
@@ -43,18 +41,11 @@ export class ProductComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.route.queryParams.subscribe((params) => {
-      this.factoryId = params['factoryId'];
-      this.factoryName = params['factoryName'];
-      console.log();
-    });
-  }
+  ngOnInit(): void {}
 
   getFactory() {
     this.factoryService.getFactory(this.factoryId).subscribe((response) => {
       this.factory = response;
-      console.log('Got the factory for Product');
     });
   }
   getProducts() {
@@ -125,5 +116,4 @@ export class ProductComponent implements OnInit {
   onFileSelected(event) {
     this.productImage = event.target.files[0];
   }
-  clickAddProduct() {}
 }
