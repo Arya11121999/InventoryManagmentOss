@@ -1,0 +1,16 @@
+.mb-1 {
+  margin-bottom: 2rem;
+}
+.update {
+  margin-left: 10px;
+  margin-top: 10px;
+}
+.add {
+  margin-top: 10px;
+}
+.style {
+  margin-right: 175px;
+}
+.table > :not(caption) > * > * {
+  background-color: default;
+}
