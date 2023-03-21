@@ -14,3 +14,9 @@
 .table > :not(caption) > * > * {
   background-color: default;
 }
+.button {
+  position: fixed;
+  bottom: 20px;
+  right: 25pc;
+  right: 25pc;
+}

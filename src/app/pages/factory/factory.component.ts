@@ -46,8 +46,7 @@ export class FactoryComponent implements OnInit {
     this.factoryObj.factoryName = this.formValue.value.factoryName;
     this.factoryObj.factoryLocation = this.formValue.value.factoryLocation;
     this.factoryService.addFactory(this.factoryObj).subscribe((response) => {
-      console.log(JSON.stringify(response));
-      alert('Factory Added Successfully');
+      // alert('Factory Added Successfully');
       this.formValue.reset();
       let ref = document.getElementById('cancel');
       ref.click();
@@ -88,7 +87,9 @@ export class FactoryComponent implements OnInit {
       this.isUpdatingFactory = false;
     });
   }
-  navigateToProduct(factoryId: number) {
-    this.router.navigate(['/factory', factoryId]);
+  navigateToProduct(factoryId: number, factoryName: string) {
+    this.router.navigate(['/factory', factoryId], {
+      queryParams: { factoryId: factoryId, factoryName: factoryName },
+    });
   }
 }

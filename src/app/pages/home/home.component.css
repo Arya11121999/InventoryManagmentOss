@@ -14,3 +14,7 @@
   position: absolute;
   top: 50%;
 }
+
+body {
+  background-color: #ee0505; /* replace with your desired color */
+}

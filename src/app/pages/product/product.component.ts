@@ -21,6 +21,9 @@ export class ProductComponent implements OnInit {
   factory: FactoryModel;
   productImage: File;
   productId: number;
+  factoryName!: string;
+  selectedProduct = null;
+  showImage = false;
   constructor(
     private productService: ProductService,
     private formBuilder: FormBuilder,
@@ -29,10 +32,16 @@ export class ProductComponent implements OnInit {
     private factoryService: FactoryService
   ) {
     this.factoryId = this.route.snapshot.params['id'];
+    this.route.queryParams.subscribe((params) => {
+      this.factoryName = params['factoryName'];
+      console.log(params);
+      console.log(this.factoryName);
+    });
+
     this.factory = new FactoryModel();
-    this.getFactory();
-    console.log(this.factoryId);
+    // this.getFactory();
     this.getProducts();
+
     this.formValue = this.formBuilder.group({
       productName: [''],
       productQuantity: [''],
@@ -43,15 +52,15 @@ export class ProductComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  getFactory() {
-    this.factoryService.getFactory(this.factoryId).subscribe((response) => {
-      this.factory = response;
-    });
-  }
+  // getFactory() {
+  //   this.factoryService.getFactory(this.factoryId).subscribe((response) => {
+  //     this.factory = response;
+  //   });
+  // }
+
   getProducts() {
     this.productService.getAllProducts(this.factoryId).subscribe((response) => {
       this.products = response;
-      console.log(JSON.stringify(this.products));
     });
   }
   resetForm() {
@@ -66,7 +75,6 @@ export class ProductComponent implements OnInit {
     formData.append('description', this.formValue.value.productDescription);
     if (this.productImage != null) formData.append('image', this.productImage);
     this.productService.addProduct(formData).subscribe((response) => {
-      console.log(JSON.stringify(response));
       alert('Product Added Successfully');
       this.formValue.reset();
       let ref = document.getElementById('cancel');
@@ -76,7 +84,6 @@ export class ProductComponent implements OnInit {
   }
   deleteProduct(ProductId: number) {
     this.productService.deleteProduct(ProductId).subscribe((response) => {
-      console.log(JSON.stringify(response));
       alert('Product Deleted');
       this.getProducts();
     });
@@ -111,9 +118,19 @@ export class ProductComponent implements OnInit {
   }
 
   navigateFactory() {
-    this.router.navigate(['']);
+    this.router.navigate(['/factory']);
   }
   onFileSelected(event) {
     this.productImage = event.target.files[0];
+  }
+
+  clickAddProduct() {}
+  viewImage(product) {
+    this.selectedProduct = ProductModel;
+    this.showImage = true;
+  }
+  hideImage() {
+    this.selectedProduct = null;
+    this.showImage = false;
   }
 }
