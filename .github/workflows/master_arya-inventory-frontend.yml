@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'arya-inventory-frontend'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_BFDA0D4B10D9441D919E49172BC71A1E }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_AAE8243396DE4D94ABC5E7444DB21FC1 }}
           package: .
